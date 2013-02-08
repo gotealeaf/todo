@@ -1,5 +1,8 @@
-%p= link_to "Add a New Todo", new_todo_path
+= form_for @todo do |f|
+  = f.text_field :name, placeholder: "Add a todo here"
+  = f.submit "Add Todo", class: 'btn'
 
 %ul
   - @todos.each do |todo|
-    %li= todo.name
+    %li
+      = link_to todo.name, todo

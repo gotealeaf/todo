@@ -17,4 +17,37 @@ describe Todo do
       todo.should_not be_name_only
     end
   end
+
+  describe "#display_text" do
+    let(:todo) { Fabricate(:todo) }
+    subject { todo.display_text }
+
+    context "no tags" do
+      it { should == "cook dinner" }
+    end
+
+    context "one tag" do
+      before { todo.tags.create(name: "home") }
+      it { should == "cook dinner (tag: home)" }
+    end
+
+    context "multiple tags" do
+      before do
+        todo.tags.create(name: "home")
+        todo.tags.create(name: "urgent")
+      end
+      it { should == "cook dinner (tags: home, urgent)" }
+    end
+
+    context "more than four tags" do
+      before do
+        todo.tags.create(name: "home")
+        todo.tags.create(name: "urgent")
+        todo.tags.create(name: "help")
+        todo.tags.create(name: "book")
+        todo.tags.create(name: "patience")
+      end
+      it { should == "cook dinner (tags: home, urgent, help, book, more...)" }
+    end
+  end
 end

@@ -23,3 +23,12 @@ section.new_todo {
 span.error {
   color: red
 }
+
+form.new_todo input[type='text'] {
+  width: 300px;
+  margin-right: 20px
+}
+
+form.new_todo input[type='submit'] {
+  margin-top: -10px
+}
