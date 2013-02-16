@@ -14,7 +14,7 @@ class TodosController < ApplicationController
 
   def create
     @todo = Todo.new(params[:todo])
-    if @todo.save
+    if @todo.save_with_tags
       redirect_to root_path
     else
       render :new
