@@ -1,4 +1,6 @@
 class TodosController < ApplicationController
+  before_filter :ensure_sign_in
+
   def index
     @todos = Todo.all
     @todo = Todo.new

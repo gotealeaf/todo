@@ -1,0 +1,6 @@
+%p Username:
+
+= form_tag sessions_path do
+  = text_field_tag :username
+  %br
+  = submit_tag "Sign in", class: "btn"

@@ -1,6 +1,9 @@
 require 'spec_helper'
 
 describe TodosController do
+
+  before { set_current_user }
+
   describe "GET index" do
     it "sets the @todos variable" do
       cook = Todo.create(name: "cook")
@@ -14,6 +17,10 @@ describe TodosController do
       get :index
       response.should render_template :index
     end
+
+    it_behaves_like "require_sign_in" do
+      let(:action) { get :index }
+    end
   end
 
   describe "GET new" do
@@ -25,6 +32,10 @@ describe TodosController do
     it "renders the new template" do
       get :new
       response.should render_template :new
+    end
+
+    it_behaves_like "require_sign_in" do
+      let(:action) { get :new }
     end
   end
 
@@ -79,6 +90,10 @@ describe TodosController do
       it "creates multiple tags with four locations" do
         post :create, todo: {name: "cook AT home, work, school and library"}
         Tag.all.map(&:name).should == ['location:home', 'location:work', 'location:school', 'location:library']
+      end
+
+      it_behaves_like "require_sign_in" do
+        let(:action) { post :create, todo: {name: 'something'}}
       end
     end
   end
