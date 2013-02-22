@@ -4,7 +4,6 @@ gem 'bootstrap-sass'
 gem 'rails', '3.2.11'
 gem 'haml-rails'
 gem 'sqlite3'
-gem 'pry'
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
@@ -19,4 +18,9 @@ group :test, :development do
   gem 'rspec-rails'
   gem 'fabrication'
   gem 'faker'
+  gem 'pry'
+end
+
+group :test do
+  gem 'capybara'
 end
