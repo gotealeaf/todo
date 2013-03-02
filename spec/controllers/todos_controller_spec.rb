@@ -2,7 +2,8 @@ require 'spec_helper'
 
 describe TodosController do
 
-  before { set_current_user }
+  let(:alice) { Fabricate(:user) }
+  before { set_current_user(alice) }
 
   describe "GET index" do
     it "sets the @todos variable" do
@@ -74,6 +75,25 @@ describe TodosController do
     it "creates a tag with upcase AT" do
       post :create, todo: {name: "shop AT the Apple Store"}
       Tag.all.map(&:name).should == ["location:the Apple Store"]
+    end
+
+    context "email sending" do
+      it "sends out the email"  do
+        post :create, todo: {name: "shop AT the Apple Store"}
+        ActionMailer::Base.deliveries.should_not be_empty
+      end
+
+      it "sends to the right recipient" do
+        post :create, todo: {name: "shop AT the Apple Store"}
+        message = ActionMailer::Base.deliveries.last
+        message.to.should == [alice.email]
+      end
+
+      it "has the right content" do
+        post :create, todo: {name: "shop AT the Apple Store"}
+        message = ActionMailer::Base.deliveries.last
+        message.body.should include('shop AT the Apple Store')
+      end
     end
 
     context "with inline locations" do
