@@ -10,3 +10,5 @@
 Todo.create(name: "cook dinner")
 Todo.create(name: "eat")
 Todo.create(name: "wash dishes")
+
+User.create(username: "joe", full_name: "Joe Smith", email: "joe@example.com")

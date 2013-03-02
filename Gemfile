@@ -24,3 +24,7 @@ end
 group :test do
   gem 'capybara'
 end
+
+group :development do
+  gem 'letter_opener'
+end
