@@ -17,7 +17,7 @@ class TodosController < ApplicationController
   def create
     @todo = Todo.new(params[:todo])
     if @todo.save_with_tags
-      AppMailer.notify_on_new_todo(current_user, @todo).deliver
+      EmailWorker.perform_async(current_user.id, @todo.id)
       redirect_to root_path
     else
       render :new

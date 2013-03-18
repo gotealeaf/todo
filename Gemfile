@@ -4,6 +4,7 @@ gem 'bootstrap-sass'
 gem 'rails', '3.2.11'
 gem 'haml-rails'
 gem 'sqlite3'
+gem 'sidekiq'
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
