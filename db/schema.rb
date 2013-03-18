@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130302181632) do
+ActiveRecord::Schema.define(:version => 20130318230524) do
 
   create_table "taggings", :force => true do |t|
     t.integer  "tag_id"
@@ -34,6 +34,7 @@ ActiveRecord::Schema.define(:version => 20130302181632) do
     t.time     "due_at"
     t.boolean  "completed"
     t.string   "token"
+    t.integer  "user_id"
   end
 
   create_table "users", :force => true do |t|

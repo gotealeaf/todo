@@ -2,7 +2,7 @@ class TodosController < ApplicationController
   before_filter :ensure_sign_in
 
   def index
-    @todos = Todo.all
+    @todos = current_user.todos
     @todo = Todo.new
   end
 
