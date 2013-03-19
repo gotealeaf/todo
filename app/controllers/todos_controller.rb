@@ -1,5 +1,4 @@
-class TodosController < ApplicationController
-  before_filter :ensure_sign_in
+class TodosController < AuthenticatedController
 
   def index
     @todos = current_user.todos
