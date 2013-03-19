@@ -6,6 +6,11 @@ class TodosController < ApplicationController
     @todo = Todo.new
   end
 
+  def admin_index
+    @todos = Todo.all
+    render :index
+  end
+
   def new
     @todo = Todo.new
   end
