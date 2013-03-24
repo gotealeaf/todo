@@ -24,6 +24,8 @@ span.error {
   color: red
 }
 
+h4 { margin-bottom: 40px }
+
 form.new_todo input[type='text'] {
   width: 300px;
   margin-right: 20px
@@ -31,4 +33,17 @@ form.new_todo input[type='text'] {
 
 form.new_todo input[type='submit'] {
   margin-top: -10px
+}
+
+form fieldset.credit_card {
+  border-top: 1px solid #ccc
+  padding-top: 60px
+}
+
+form fieldset.credit_card select#date_month {
+  margin-right: 10px
+}
+
+form fieldset.credit_card select#date_year {
+  width: 70px
 }
