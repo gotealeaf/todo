@@ -2,12 +2,13 @@
 
 = form_tag payments_path do
   %fieldset.credit_card
+    %span.payment-errors
     %label Credit Card Number
-    %input.span3(type="text")
+    %input.span3(type="text" data-stripe='number')
     %label Security Code
-    %input.span3(type="text")
+    %input.span3(type="text" data-stripe='cvc')
     %label Expiration
-    = select_month(Date.today, {add_month_numbers: true},  class: 'span2')
-    = select_year(Date.today.year, {start_year: Date.today.year, end_year: Date.today.year + 4}, class: 'span1')
+    = select_month(Date.today, {add_month_numbers: true}, name: nil, class: 'span2', data: {stripe: 'exp-month'})
+    = select_year(Date.today.year, {start_year: Date.today.year, end_year: Date.today.year + 4}, name: nil, class: 'span1', data: {stripe: 'exp-year'})
   %fieldset.actions
     %input(type="submit" value="Submit Payment" class="btn")
