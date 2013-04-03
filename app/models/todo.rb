@@ -10,10 +10,6 @@ class Todo < ActiveRecord::Base
     description.blank?
   end
 
-  def display_text
-    name + tag_text
-  end
-
   def save_with_tags
     if save
       create_location_tags
@@ -29,13 +25,6 @@ class Todo < ActiveRecord::Base
 
   private
 
-  def tag_text
-    if tags.any?
-      " (#{tags.one? ? 'tag' : 'tags' }: #{tags.map(&:name).first(4).join(", ")}#{', more...' if tags.count > 4})"
-    else
-      ""
-    end
-  end
 
   def create_location_tags
     location_string = name.slice(/.*\bAT\b(.*)/, 1).try(:strip)
