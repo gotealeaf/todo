@@ -1,4 +1,7 @@
 class TodoDecorator
+  extend Forwardable
+
+  def_delegators :todo, :name_only?
   attr_reader :todo
 
   def initialize(todo)
@@ -12,7 +15,7 @@ class TodoDecorator
   private
 
   def tag_text
-    if tags.any?
+    if todo.tags.any?
       " (#{tags.one? ? 'tag' : 'tags' }: #{tags.map(&:name).first(4).join(", ")}#{', more...' if tags.count > 4})"
     else
       ""

@@ -23,8 +23,11 @@ class Todo < ActiveRecord::Base
     token
   end
 
-  private
+  def decorator
+    TodoDecorator.new(self)
+  end
 
+  private
 
   def create_location_tags
     location_string = name.slice(/.*\bAT\b(.*)/, 1).try(:strip)
