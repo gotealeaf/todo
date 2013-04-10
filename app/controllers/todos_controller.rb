@@ -20,23 +20,8 @@ class TodosController < AuthenticatedController
 
   def create
     @todo = Todo.new(params[:todo])
-    credit = Credit.new(current_user)
-
     if @todo.save_with_tags
-      if UserLevelPolicy.new(current_user).premium?
-        credit = credit - 1
-      else
-        credit = credit - 2
-      end
-
-      credit.save
-
-      if credit.depleted?
-        AppMailer.notify_insufficient_credit(current_user).deliver
-      elsif credit.low_balance?
-        AppMailer.notify_low_balance(current_user).deliver
-      end
-
+      CreditDeduction.new(current_user).deduct_credit
       redirect_to root_path
     else
       render :new
