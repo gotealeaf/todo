@@ -52,6 +52,14 @@ describe TodosController do
       response.should redirect_to root_path
     end
 
+    it "delegates to CreditDeduction to deduct credit" do
+      credit_deduction = double("credit deduction")
+      CreditDeduction.stub(:new).with(alice).and_return(credit_deduction)
+      credit_deduction.should_receive(:deduct_credit)
+      post :create, todo: {name: "cook", description: "I like cooking!" }
+
+    end
+
     it "does not create a todo when the input is invalid" do
       post :create, todo: {description: "I like cooking!" }
       Todo.count.should == 0
